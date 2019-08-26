@@ -10,7 +10,8 @@ function TodoList(props) {
                     title={t.title}
                     completed={t.completed}
                     delete={props.deleteTodo}
-                    toggle={props.toggleCompleted} />
+                    toggle={props.toggleCompleted}
+                    edit={props.editTodo} />
             ))}
         </div>
     )

@@ -12,7 +12,11 @@ function TodoApp() {
     const [todos, setTodos] = useState(initialTodos)
 
     const addTodo = newTodoText => {
-        setTodos([...todos, { id: uuid(), title: newTodoText, completed: true }])
+        if (newTodoText === '') {
+            return alert('You must write something!')
+        } else {
+            setTodos([...todos, { id: uuid(), title: newTodoText, completed: false }])
+        }
     }
 
     const deleteTodo = todoId => {
@@ -20,8 +24,11 @@ function TodoApp() {
         setTodos(filteredTodos)
     }
 
-    const editTodo = todoId => {
-
+    const editTodo = (todoId, newTitle) => {
+        let mappedTodos = todos.map(todo => (
+            todo.id === todoId ? { ...todo, title: newTitle } : todo
+        ))
+        setTodos(mappedTodos)
     }
 
     const toggleCompleted = todoId => {
@@ -34,7 +41,7 @@ function TodoApp() {
     return (
         <div>
             <h1>Todos with Hooks!</h1>
-            <TodoList todos={todos} deleteTodo={deleteTodo} toggleCompleted={toggleCompleted} />
+            <TodoList todos={todos} deleteTodo={deleteTodo} editTodo={editTodo} toggleCompleted={toggleCompleted} />
             <TodoForm addTodo={addTodo} />
         </div>
     )
