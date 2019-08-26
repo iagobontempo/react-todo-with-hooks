@@ -5,7 +5,12 @@ function TodoList(props) {
     return (
         <div>
             {props.todos.map(t => (
-                <TodoItem key={t.id} id={t.id} title={t.title} completed={t.completed} />
+                <TodoItem key={t.id}
+                    id={t.id}
+                    title={t.title}
+                    completed={t.completed}
+                    delete={props.deleteTodo}
+                    toggle={props.toggleCompleted} />
             ))}
         </div>
     )
