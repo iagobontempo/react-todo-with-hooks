@@ -1,15 +1,20 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import TodoList from './TodoList';
 import TodoForm from './TodoForm';
 import uuid from 'uuid/v4'
 
 function TodoApp() {
-    const initialTodos = [
+    const initialTodos = JSON.parse(window.localStorage.getItem("todos")) || [
         { id: 1, title: "Clean the house", completed: false },
         { id: 2, title: "Be rich", completed: false },
         { id: 3, title: "Be yourself", completed: true }
     ]
+
     const [todos, setTodos] = useState(initialTodos)
+
+    useEffect(() => {
+        window.localStorage.setItem("todos", JSON.stringify(todos))
+    }, [todos])
 
     const addTodo = newTodoText => {
         if (newTodoText === '') {
